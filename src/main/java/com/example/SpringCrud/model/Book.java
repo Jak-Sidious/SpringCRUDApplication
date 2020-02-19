@@ -44,5 +44,3 @@ public class Book {
     }
 }
 
-
-src/main/java/com/example/SpringCrud/model/Book.java
