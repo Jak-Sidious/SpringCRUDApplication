@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringCrudApplication {
 
     private static final Logger logger = LogManager.getLogger(SpringCrudApplication.class);
+
     public static void main(String[] args) {
         logger.info("Starting the Spring boot application");
         SpringApplication.run(SpringCrudApplication.class, args);
