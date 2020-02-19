@@ -3,12 +3,7 @@ package com.example.SpringCrud.controller;
 import com.example.SpringCrud.model.Book;
 import com.example.SpringCrud.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class BookController {
@@ -21,12 +16,20 @@ public class BookController {
     }
 
     @GetMapping("/books")
-    List<Book> getAllBooks() {
+    Object getAllBooks() {
+        if(bookService.getAllBooks().size() == 0){
+            return "No Books available";
+        }
         return bookService.getAllBooks();
     }
 
     @PostMapping("/books")
     Book createBook(@RequestBody Book newBook){
         return bookService.createBook(newBook);
+    }
+
+    @GetMapping("/books/{id}")
+    Book getSingleBook(@PathVariable Long id) {
+        return bookService.getBookById(id);
     }
 }
