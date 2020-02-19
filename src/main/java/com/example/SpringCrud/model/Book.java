@@ -1,14 +1,19 @@
 package com.example.SpringCrud.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-
 public class Book {
+    @Column(name= "id")
     private @Id @GeneratedValue Long id;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name= "author")
     private String author;
 
     public Book() {

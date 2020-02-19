@@ -10,6 +10,6 @@ interface IBookService {
     List<Book> getAllBooks();
     Book getBookById(Long id);
     Book createBook(Book newBook);
-    Book update(Long id);
-    void deleteBook(Long id);
+    Book update(Book updatedBook);
+    Book deleteBook(Long id);
 }
