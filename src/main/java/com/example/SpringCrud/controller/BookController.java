@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("books")
@@ -33,7 +32,11 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Book> getSingleBook(@PathVariable("id") @NotBlank Long id) {
+    public Object getSingleBook(@PathVariable("id") @NotBlank Long id) {
+        if(bookService.getBookById(id) == null){
+            return "That Book is not available";
+        }
+
         return bookService.getBookById(id);
     }
 
@@ -43,13 +46,13 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public Optional<Book> updateBook(@RequestBody Book updateBook, @PathVariable("id") @NotBlank Long id){
-        return bookService.getBookById(id)
-                .map(book -> {
-                    book.setTitle(updateBook.getTitle());
-                    book.setAuthor(updateBook.getAuthor());
-                    return bookService.update(book);
-                });
-
+    public Object updateBook(@RequestBody Book updateBook, @PathVariable("id") @NotBlank Long id){
+        Book leBookUpdate = bookService.getBookById(id);
+        if(leBookUpdate == null){
+            return "That Book doesn't exist";
+        }
+        leBookUpdate.setTitle(updateBook.getTitle());
+        leBookUpdate.setAuthor(updateBook.getAuthor());
+        return bookService.update(leBookUpdate);
     }
 }
