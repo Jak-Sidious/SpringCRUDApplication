@@ -1,25 +1,25 @@
 package com.example.SpringCrud.controller;
 
-import com.example.SpringCrud.model.Book;
 import com.example.SpringCrud.model.User;
 import com.example.SpringCrud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import sun.tools.jconsole.inspector.XObject;
 
 import javax.validation.constraints.NotBlank;
 
 @RestController
+@RequestMapping("users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
 
+    private final UserService userService;
+
+    @Autowired
     UserController(UserService userService){
         this.userService = userService;
     }
 
-    @GetMapping("/users")
+    @GetMapping()
     public Object getAllUsers(){
         if(userService.getAllUsers().size() == 0){
             return "No Users Exist";
@@ -27,22 +27,22 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @PostMapping("/users")
+    @PostMapping()
     public User createUser(@RequestBody User newUser){
         return userService.createUser(newUser);
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public User getUser(@PathVariable("id") @NotBlank Long id){
         return userService.getUserById(id);
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public User deleteUser(@PathVariable("id") @NotBlank Long id) {
         return userService.deleteUser(id);
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/{id}")
     public Object updateUser(@RequestBody User updateUser, @PathVariable("id") @NotBlank Long id) {
         User leUserUpdate = userService.getUserById(id);
         if(leUserUpdate == null){

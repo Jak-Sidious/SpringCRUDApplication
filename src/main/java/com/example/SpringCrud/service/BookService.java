@@ -3,10 +3,12 @@ package com.example.SpringCrud.service;
 import com.example.SpringCrud.model.Book;
 import com.example.SpringCrud.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 interface IBookService {
     List<Book> getAllBooks();
     Book getBookById(Long id);
@@ -15,7 +17,7 @@ interface IBookService {
     Book deleteBook(Long id);
 }
 
-@Service
+@Component
 public class BookService implements IBookService {
 
     @Autowired
@@ -28,7 +30,7 @@ public class BookService implements IBookService {
 
     @Override
     public Book getBookById(Long id) {
-        return bookRepository.getOne(id);
+        return bookRepository.findById(id).orElse(null);
     }
 
     @Override
