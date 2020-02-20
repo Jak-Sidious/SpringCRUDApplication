@@ -6,18 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("books")
 public class BookController {
 
-    @Autowired
-    private  BookService bookService;
+    private final BookService bookService;
 
+    @Autowired
     BookController(BookService bookService){
         this.bookService = bookService;
     }
 
-    @GetMapping("/books")
+    @GetMapping()
     public Object getAllBooks() {
         if(bookService.getAllBooks().size() == 0){
             return "No Books available";
@@ -25,26 +27,29 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
-    @PostMapping("/books")
+    @PostMapping()
     public Book createBook(@RequestBody Book newBook){
         return bookService.createBook(newBook);
     }
 
-    @GetMapping("/books/{id}")
-    public Book getSingleBook(@PathVariable("id") @NotBlank Long id) {
+    @GetMapping("/{id}")
+    public Optional<Book> getSingleBook(@PathVariable("id") @NotBlank Long id) {
         return bookService.getBookById(id);
     }
 
-    @DeleteMapping("/books/{id}")
+    @DeleteMapping("/{id}")
     public Book deleteBook(@PathVariable("id") @NotBlank Long id) {
         return bookService.deleteBook(id);
     }
 
-    @PutMapping("/books/{id}")
-    public Book updateBook(@RequestBody Book updateBook, @PathVariable("id") @NotBlank Long id){
-        Book leUpdate = bookService.getBookById(id);
-        leUpdate.setTitle(updateBook.getTitle());
-        leUpdate.setAuthor(updateBook.getAuthor());
-        return bookService.update(leUpdate);
+    @PutMapping("/{id}")
+    public Optional<Book> updateBook(@RequestBody Book updateBook, @PathVariable("id") @NotBlank Long id){
+        return bookService.getBookById(id)
+                .map(book -> {
+                    book.setTitle(updateBook.getTitle());
+                    book.setAuthor(updateBook.getAuthor());
+                    return bookService.update(book);
+                });
+
     }
 }

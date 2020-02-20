@@ -3,11 +3,12 @@ package com.example.SpringCrud.service;
 import com.example.SpringCrud.model.Book;
 import com.example.SpringCrud.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
-@Service
+@Component
 public class BookService implements IBookService {
 
     @Autowired
@@ -19,8 +20,8 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public Book getBookById(Long id) {
-        return bookRepository.getOne(id);
+    public Optional<Book> getBookById(Long id) {
+        return bookRepository.findById(id);
     }
 
     @Override
