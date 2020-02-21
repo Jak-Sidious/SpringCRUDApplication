@@ -50,18 +50,18 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public Object borrowBook(Long userId, Long bookId) {
+    public User borrowBook(Long userId, Long bookId) {
         User theBorrower = userRepository.findById(userId).orElse(null);
         Book toBorrow = bookRepository.findById(bookId).orElse(null);
-        theBorrower.getBorrowedBooks().add(toBorrow);
+        theBorrower.setBorrowedBooks(toBorrow);
         return userRepository.save(theBorrower);
     }
 
     @Override
-    public Object returnBook(Long userId, Long bookId) {
+    public User returnBook(Long userId, Long bookId) {
         User theBorrower = userRepository.findById(userId).orElse(null);
-        Book toBorrow = bookRepository.findById(bookId).orElse(null);
-        theBorrower.getBorrowedBooks().remove(toBorrow);
+        Book toReturn = bookRepository.findById(bookId).orElse(null);
+        theBorrower.returnBook(toReturn);
         return userRepository.save(theBorrower);
     }
 }

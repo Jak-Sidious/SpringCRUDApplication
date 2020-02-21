@@ -49,4 +49,12 @@ public class User {
     public List<Book> getBorrowedBooks() {
         return borrowedBooks;
     }
+
+    public void setBorrowedBooks(Book borrow){
+        borrowedBooks.add(borrow);
+    }
+
+    public void returnBook(Book borrow){
+        borrowedBooks.remove(borrow);
+    }
 }

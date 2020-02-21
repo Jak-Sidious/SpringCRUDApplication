@@ -12,6 +12,6 @@ interface IUserService {
     User createUser(User newUser);
     Object updateUser(Long id, User updatedUser);
     User deleteUser(Long id);
-    Object borrowBook(Long userId, Long bookId);
-    Object returnBook(Long userId, Long bookId);
+    User borrowBook(Long userId, Long bookId);
+    User returnBook(Long userId, Long bookId);
 }
