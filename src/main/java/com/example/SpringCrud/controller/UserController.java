@@ -1,18 +1,13 @@
 package com.example.SpringCrud.controller;
 
-import com.example.SpringCrud.SpringCrudApplication;
 import com.example.SpringCrud.model.Book;
 import com.example.SpringCrud.model.User;
 import com.example.SpringCrud.service.BookService;
 import com.example.SpringCrud.service.UserService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
-import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("users")

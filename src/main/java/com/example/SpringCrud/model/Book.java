@@ -8,7 +8,8 @@ import javax.persistence.Id;
 @Entity
 public class Book {
     @Column(name= "id")
-    private @Id @GeneratedValue Long id;
+    @Id @GeneratedValue
+    private Long id;
 
     @Column(name = "title")
     private String title;
@@ -23,8 +24,6 @@ public class Book {
         this.title = title;
         this.author = author;
     }
-
-
 
     public Long getId() {
         return id;

@@ -1,29 +1,30 @@
 package com.example.SpringCrud.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class User {
-    private @Id @GeneratedValue Long userId;
+    @Column(name= "user_id")
+    @Id @GeneratedValue
+    private Long userId;
+
+    @Column(name= "user_name")
     private String userName;
+
+    @Column(name= "age")
     private int age;
 
     @OneToMany()
     private List<Book> borrowedBooks;
 
     public User() {
-
     }
 
     public User(String userName, int age){
         this.userName = userName;
         this.age = age;
     }
-
 
     public Long getUserId() {
         return userId;
