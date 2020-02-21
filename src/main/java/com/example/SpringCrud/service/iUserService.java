@@ -10,6 +10,8 @@ interface IUserService {
     List<User> getAllUsers();
     User getUserById(Long id);
     User createUser(User newUser);
-    User updateUser(User updatedUser);
+    Object updateUser(Long id, User updatedUser);
     User deleteUser(Long id);
+    Object borrowBook(Long userId, Long bookId);
+    Object returnBook(Long userId, Long bookId);
 }

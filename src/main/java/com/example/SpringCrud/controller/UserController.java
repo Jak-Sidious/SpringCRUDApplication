@@ -48,41 +48,16 @@ public class UserController {
 
     @PutMapping("/{id}")
     public Object updateUser(@RequestBody User updateUser, @PathVariable("id") @NotBlank Long id) {
-        User leUserUpdate = userService.getUserById(id);
-        if(leUserUpdate == null){
-            return "User Doesn't exist";
-        }
-        leUserUpdate.setUserName(updateUser.getUserName());
-        leUserUpdate.setAge(updateUser.getAge());
-        return userService.updateUser(leUserUpdate);
+        return userService.updateUser(id, updateUser);
     }
 
     @PutMapping("/{id}/borrow/{bookid}")
     public Object borrowBook(@PathVariable("id") @NotBlank Long id, @PathVariable("bookid") @NotBlank Long bookid) {
-        User leUserUpdate = userService.getUserById(id);
-        Book toBorrow = bookService.getBookById(bookid);
-        leUserUpdate.getBorrowedBooks();
-        if(leUserUpdate == null){
-            return "User Doesn't exist";
-        } else if (toBorrow == null){
-            return "That Book is currently unavailable";
-        }
-
-        leUserUpdate.getBorrowedBooks().add(toBorrow);
-        return userService.updateUser(leUserUpdate);
+        return userService.borrowBook(id, bookid);
     }
 
     @PutMapping("/{id}/return/{bookid}")
     public Object returnBook(@PathVariable("id") @NotBlank Long id, @PathVariable("bookid") @NotBlank Long bookid){
-        User leUserUpdate = userService.getUserById(id);
-        Book toBorrow = bookService.getBookById(bookid);
-        leUserUpdate.getBorrowedBooks();
-        if(leUserUpdate == null){
-            return "User Doesn't exist";
-        } else if (toBorrow == null){
-            return "That Book is currently unavailable";
-        }
-        leUserUpdate.getBorrowedBooks().remove(toBorrow);
-        return userService.updateUser(leUserUpdate);
+        return userService.returnBook(id, bookid);
     }
 }

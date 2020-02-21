@@ -2,6 +2,7 @@ package com.example.SpringCrud.service;
 
 import com.example.SpringCrud.model.Book;
 import com.example.SpringCrud.model.User;
+import com.example.SpringCrud.repository.BookRepository;
 import com.example.SpringCrud.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,9 @@ public class UserService implements IUserService{
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
 
     @Override
     public List<User> getAllUsers() {
@@ -30,14 +34,34 @@ public class UserService implements IUserService{
         return userRepository.save(newUser);
     }
 
+
     @Override
-    public User updateUser(User updatedUser) {
-        return userRepository.save(updatedUser);
+    public User updateUser(Long id, User updatedUser) {
+        User sentId = userRepository.findById(id).orElse(null);
+        sentId.setUserName(updatedUser.getUserName());
+        sentId.setAge(updatedUser.getAge());
+        return userRepository.save(sentId);
     }
 
     @Override
     public User deleteUser(Long id) {
         userRepository.deleteById(id);
         return null;
+    }
+
+    @Override
+    public Object borrowBook(Long userId, Long bookId) {
+        User theBorrower = userRepository.findById(userId).orElse(null);
+        Book toBorrow = bookRepository.findById(bookId).orElse(null);
+        theBorrower.getBorrowedBooks().add(toBorrow);
+        return userRepository.save(theBorrower);
+    }
+
+    @Override
+    public Object returnBook(Long userId, Long bookId) {
+        User theBorrower = userRepository.findById(userId).orElse(null);
+        Book toBorrow = bookRepository.findById(bookId).orElse(null);
+        theBorrower.getBorrowedBooks().remove(toBorrow);
+        return userRepository.save(theBorrower);
     }
 }
