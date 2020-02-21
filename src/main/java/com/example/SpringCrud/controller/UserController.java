@@ -62,20 +62,18 @@ public class UserController {
         return userService.updateUser(leUserUpdate);
     }
 
-    @GetMapping("/{id}/borrowed")
-    public List<Book> getBorrowed(@PathVariable("id") @NotBlank Long id) {
-        return userService.getBorrowed(userService.getUserById(id));
-    }
+    @PutMapping("/{id}/borrow/{bookid}")
+    public Object borrowBook(@PathVariable("id") @NotBlank Long id, @PathVariable("bookid") @NotBlank Long bookid) {
+        User leUserUpdate = userService.getUserById(id);
+        Book toBorrow = bookService.getBookById(bookid);
+        leUserUpdate.getBorrowedBooks();
+        if(leUserUpdate == null){
+            return "User Doesn't exist";
+        } else if (toBorrow == null){
+            return "That Book is currently unavailable";
+        }
 
-    @GetMapping("/{id}/borrow")
-    public Object borrow(@RequestBody Long userId, @PathVariable("id") @NotBlank Long id){
-        final Logger logger = LogManager.getLogger(SpringCrudApplication.class);
-
-        Book theBook = bookService.getBookById(userId);
-        logger.info("This is what we return" + theBook);
-
-
-        return userService.borrowBook(theBook);
-//        return userService.getUserById(id);
+        leUserUpdate.getBorrowedBooks().add(toBorrow);
+        return userService.updateUser(leUserUpdate);
     }
 }
