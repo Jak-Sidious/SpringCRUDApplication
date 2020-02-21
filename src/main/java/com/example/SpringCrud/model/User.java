@@ -48,8 +48,4 @@ public class User {
     public List<Book> getBorrowedBooks() {
         return borrowedBooks;
     }
-
-    public void setBorrowedBooks(List<Book> borrowedBooks) {
-        this.borrowedBooks = borrowedBooks;
-    }
 }

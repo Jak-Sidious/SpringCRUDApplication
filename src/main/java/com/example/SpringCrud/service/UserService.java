@@ -40,20 +40,4 @@ public class UserService implements IUserService{
         userRepository.deleteById(id);
         return null;
     }
-
-    @Override
-    public List<Book> getBorrowed(User user) {
-        return user.getBorrowedBooks();
-    }
-
-
-    @Override
-    public Book borrowBook(Book borrowed) {
-        return borrowed;
-    }
-
-    @Override
-    public Book returnBook(Book returned) {
-        return null;
-    }
 }

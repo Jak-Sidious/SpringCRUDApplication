@@ -76,4 +76,18 @@ public class UserController {
         leUserUpdate.getBorrowedBooks().add(toBorrow);
         return userService.updateUser(leUserUpdate);
     }
+
+    @PutMapping("/{id}/return/{bookid}")
+    public Object returnBook(@PathVariable("id") @NotBlank Long id, @PathVariable("bookid") @NotBlank Long bookid){
+        User leUserUpdate = userService.getUserById(id);
+        Book toBorrow = bookService.getBookById(bookid);
+        leUserUpdate.getBorrowedBooks();
+        if(leUserUpdate == null){
+            return "User Doesn't exist";
+        } else if (toBorrow == null){
+            return "That Book is currently unavailable";
+        }
+        leUserUpdate.getBorrowedBooks().remove(toBorrow);
+        return userService.updateUser(leUserUpdate);
+    }
 }

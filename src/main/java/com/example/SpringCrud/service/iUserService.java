@@ -1,6 +1,5 @@
 package com.example.SpringCrud.service;
 
-import com.example.SpringCrud.model.Book;
 import com.example.SpringCrud.model.User;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,4 @@ interface IUserService {
     User createUser(User newUser);
     User updateUser(User updatedUser);
     User deleteUser(Long id);
-    List<Book> getBorrowed(User user);
-    Book borrowBook(Book borrowed);
-    Book returnBook(Book returned);
 }
