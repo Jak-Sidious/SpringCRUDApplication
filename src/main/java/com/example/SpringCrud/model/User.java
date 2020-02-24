@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "user")
 public class User {
     @Column(name= "user_id")
     @Id @GeneratedValue
@@ -15,7 +16,7 @@ public class User {
     @Column(name= "age")
     private int age;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = false)
     private List<Book> borrowedBooks;
 
     public User() {

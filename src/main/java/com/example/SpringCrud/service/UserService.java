@@ -51,10 +51,12 @@ public class UserService implements IUserService{
 
     @Override
     public User borrowBook(Long userId, Long bookId) {
-        User theBorrower = userRepository.findById(userId).orElse(null);
-        Book toBorrow = bookRepository.findById(bookId).orElse(null);
-        theBorrower.setBorrowedBooks(toBorrow);
-        return userRepository.save(theBorrower);
+          User theBorrower = userRepository.findById(userId).orElse(null);
+          Book toBorrow = bookRepository.findById(bookId).orElse(null);
+          theBorrower.setBorrowedBooks(toBorrow);
+          toBorrow.setUser(theBorrower);
+          theBorrower.setBorrowedBooks(toBorrow);
+          return userRepository.save(theBorrower);
     }
 
     @Override
@@ -62,6 +64,7 @@ public class UserService implements IUserService{
         User theBorrower = userRepository.findById(userId).orElse(null);
         Book toReturn = bookRepository.findById(bookId).orElse(null);
         theBorrower.returnBook(toReturn);
+        toReturn.setUser(null);
         return userRepository.save(theBorrower);
     }
 }
