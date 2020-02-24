@@ -51,11 +51,4 @@ public class User {
         return borrowedBooks;
     }
 
-    public void setBorrowedBooks(Book borrow){
-        borrowedBooks.add(borrow);
-    }
-
-    public void returnBook(Book borrow){
-        borrowedBooks.remove(borrow);
-    }
 }

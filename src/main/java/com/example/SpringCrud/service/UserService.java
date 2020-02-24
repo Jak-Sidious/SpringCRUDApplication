@@ -55,9 +55,7 @@ public class UserService implements IUserService{
           if (theBorrower != null){
               Book toBorrow = bookRepository.findById(bookId).orElse(null);
               if(toBorrow != null){
-                  theBorrower.setBorrowedBooks(toBorrow);
                   toBorrow.setUser(theBorrower);
-                  theBorrower.setBorrowedBooks(toBorrow);
                   return userRepository.save(theBorrower);
               }
           }
@@ -70,7 +68,6 @@ public class UserService implements IUserService{
         if (theBorrower != null){
             Book toReturn = bookRepository.findById(bookId).orElse(null);
             if(toReturn != null){
-                theBorrower.returnBook(toReturn);
                 toReturn.setUser(null);
                 return userRepository.save(theBorrower);
             }
