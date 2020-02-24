@@ -54,10 +54,12 @@ public class UserService implements IUserService{
           User theBorrower = userRepository.findById(userId).orElse(null);
           if (theBorrower != null){
               Book toBorrow = bookRepository.findById(bookId).orElse(null);
-              theBorrower.setBorrowedBooks(toBorrow);
-              toBorrow.setUser(theBorrower);
-              theBorrower.setBorrowedBooks(toBorrow);
-              return userRepository.save(theBorrower);
+              if(toBorrow != null){
+                  theBorrower.setBorrowedBooks(toBorrow);
+                  toBorrow.setUser(theBorrower);
+                  theBorrower.setBorrowedBooks(toBorrow);
+                  return userRepository.save(theBorrower);
+              }
           }
           return null;
     }
@@ -67,9 +69,11 @@ public class UserService implements IUserService{
         User theBorrower = userRepository.findById(userId).orElse(null);
         if (theBorrower != null){
             Book toReturn = bookRepository.findById(bookId).orElse(null);
-            theBorrower.returnBook(toReturn);
-            toReturn.setUser(null);
-            return userRepository.save(theBorrower);
+            if(toReturn != null){
+                theBorrower.returnBook(toReturn);
+                toReturn.setUser(null);
+                return userRepository.save(theBorrower);
+            }
         }
         return null;
     }
