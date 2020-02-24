@@ -4,6 +4,7 @@ import com.example.SpringCrud.model.Book;
 import com.example.SpringCrud.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

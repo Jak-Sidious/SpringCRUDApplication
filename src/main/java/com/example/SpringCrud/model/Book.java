@@ -1,14 +1,14 @@
 package com.example.SpringCrud.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
 public class Book {
     @Column(name= "id")
-    private @Id @GeneratedValue Long id;
+    @Id @GeneratedValue
+    private Long id;
 
     @Column(name = "title")
     private String title;
@@ -16,12 +16,24 @@ public class Book {
     @Column(name= "author")
     private String author;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
     public Book() {
     }
 
     public Book(String title, String author){
         this.title = title;
         this.author = author;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getId() {
