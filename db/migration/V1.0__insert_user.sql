@@ -1,1 +1,0 @@
-INSERT INTO `user`(`username`, `age`) VALUES('Migration Test', 15);
