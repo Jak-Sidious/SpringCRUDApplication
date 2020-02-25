@@ -148,13 +148,6 @@
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>6.2.4</version>
-                <configuration>
-                    <user>ApiAdmin</user>
-                    <password>AdminPassword</password>
-                    <schemas>
-                        <schema>LibraryApi</schema>
-                    </schemas>
-                </configuration>
             </plugin>
         </plugins>
     </build>

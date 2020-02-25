@@ -16,9 +16,3 @@ CREATE TABLE IF NOT EXISTS book (
         references user(user_id)
         on delete CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
-
-INSERT INTO user(user_id, age ,user_name, borrowedBooks) values
-    (null, 12, 'bosco', null);
-
-INSERT INTO book(id, title ,author, user_user_id) values
-    (null, 'Anarchists Cookbook', 'Anarchists annonymous', null);
