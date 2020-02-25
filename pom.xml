@@ -31,12 +31,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!-- Comment out FLyway for the mean time-->
-<!--        <dependency>-->
-<!--            <groupId>org.flywaydb</groupId>-->
-<!--            <artifactId>flyway-core</artifactId>-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -148,6 +142,19 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <!-- Flyway plugin -->
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>4.0.3</version>
+                <configuration>
+                    <user>ApiAdmin</user>
+                    <password>AdminPassword</password>
+                    <schemas>
+                        <schema>LibraryApi</schema>
+                    </schemas>
+                </configuration>
             </plugin>
         </plugins>
     </build>
