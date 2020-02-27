@@ -4,7 +4,6 @@ import com.example.SpringCrud.model.Book;
 import com.example.SpringCrud.service.BookService;
 import com.example.SpringCrud.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +19,6 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -57,7 +54,6 @@ public class BookControllerIntegrationTest {
     @Test
     public void noBook_WhenGetBooks_thenReturnString() throws Exception {
         String response = "No Books available";
-        List<Book> allBooks = Arrays.asList();
 
         mvc.perform(get("/books")
                 .contentType(MediaType.APPLICATION_JSON))
