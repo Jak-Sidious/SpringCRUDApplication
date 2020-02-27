@@ -14,4 +14,5 @@ interface IUserService {
     User deleteUser(Long id);
     User borrowBook(Long userId, Long bookId);
     User returnBook(Long userId, Long bookId);
+    User getUserByUsername(String username);
 }

@@ -74,4 +74,9 @@ public class UserService implements IUserService{
         }
         return null;
     }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return userRepository.findByUserName(username);
+    }
 }

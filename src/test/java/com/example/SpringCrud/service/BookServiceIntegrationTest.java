@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -79,7 +78,6 @@ public class BookServiceIntegrationTest {
     public void whenBookExists_thenItCanBeDeleted(){
         String title = "Testing in SpringBoot";
         Book found = iBookService.getBookByTitle(title);
-        iBookService.deleteBook(found.getId());
 
         assertThat(iBookService.deleteBook(found.getId()))
                 .isEqualTo(null);
