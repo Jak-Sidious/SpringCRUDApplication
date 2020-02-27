@@ -12,4 +12,5 @@ interface IBookService {
     Book createBook(Book newBook);
     Book update(Book updatedBook);
     Book deleteBook(Long id);
+    Book getBookByTitle(String title);
 }

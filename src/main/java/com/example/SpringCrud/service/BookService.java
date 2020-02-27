@@ -4,7 +4,7 @@ import com.example.SpringCrud.model.Book;
 import com.example.SpringCrud.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
@@ -38,5 +38,10 @@ public class BookService implements IBookService {
     public Book deleteBook(Long id) {
         bookRepository.deleteById(id);
         return null;
+    }
+
+    @Override
+    public Book getBookByTitle(String title) {
+        return bookRepository.findByTitle(title);
     }
 }
